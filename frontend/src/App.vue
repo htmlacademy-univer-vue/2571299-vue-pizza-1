@@ -1,14 +1,11 @@
 <template>
-  <!-- <app-layout> -->
-  <app-header />
-  <home-view />
-  <!-- </app-layout> -->
+  <AppLayout>
+    <router-view />
+  </AppLayout>
 </template>
 
 <script setup>
-// import { AppLayout } from "@/layouts";
-import { HomeView } from "@/views";
-import { AppHeader } from "@/layouts";
+import { AppLayout } from "@/layouts";
 </script>
 
 <style lang="scss">
