@@ -13,8 +13,8 @@
           <input
             type="radio"
             name="diameter"
-            :value="size.multiplier"
-            :checked="modelValue === size.multiplier"
+            :value="size.id"
+            :checked="modelValue === size.id"
             class="visually-hidden"
             @input="emit('update:modelValue', $event.target.value)"
           />
@@ -46,48 +46,6 @@ const emit = defineEmits(["update:modelValue"]);
   width: 373px;
   margin-top: 15px;
   margin-bottom: 15px;
-}
-
-.sheet {
-  padding-top: 15px;
-
-  border-radius: 8px;
-  background-color: $white;
-  box-shadow: $shadow-light;
-}
-
-.sheet__title {
-  padding-right: 18px;
-  padding-left: 18px;
-}
-
-.sheet__content {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  margin-top: 8px;
-  padding-top: 18px;
-  padding-right: 18px;
-  padding-left: 18px;
-
-  border-top: 1px solid rgba($green-500, 0.1);
-}
-
-.title {
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-
-  color: $black;
-
-  &--big {
-    @include b-s36-h42;
-  }
-
-  &--small {
-    @include b-s18-h21;
-  }
 }
 
 .diameter__input {
