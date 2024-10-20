@@ -1,4 +1,8 @@
 <template>
+  <div class="layout__title">
+    <h1 class="title title--big">Мои данные</h1>
+  </div>
+
   <div class="user">
     <picture>
       <source
@@ -251,5 +255,9 @@
   button {
     padding: 12px 23px;
   }
+}
+
+.layout__title {
+  margin-bottom: 27px;
 }
 </style>

@@ -25,6 +25,13 @@ export default [
     name: "UserView",
     component: () => import("../views/UserView.vue"),
     children: [],
-    meta: { layout: "AppLayoutSidebar", title: "Мои данные" },
+    meta: { layout: "AppLayoutSidebar" },
+  },
+  {
+    path: "/orders",
+    name: "OrdersView",
+    component: () => import("../views/OrdersView.vue"),
+    children: [],
+    meta: { layout: "AppLayoutSidebar" },
   },
 ];
