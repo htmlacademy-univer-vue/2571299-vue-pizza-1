@@ -1,39 +1,41 @@
 <template>
+  <div class="layout__title">
+    <h1 class="title title--big">Мои данные</h1>
+  </div>
+
   <div class="user">
     <picture>
-      <source
-        type="image/webp"
-        srcset="
-          @/assets/img/users/user5@2x.webp 1x,
-          @/assets/img/users/user5@4x.webp 2x
-        "
-      />
       <img
-        src="@/assets/img/users/user5@2x.jpg"
-        srcset="@/assets/img/users/user5@4x.jpg"
-        alt="Василий Ложкин"
+        :src="userStore.getWhoAmI.avatar"
+        :alt="userStore.getWhoAmI.name"
         width="72"
         height="72"
       />
     </picture>
     <div class="user__name">
-      <span>Василий Ложкин</span>
+      <span>{{ userStore.getWhoAmI.name }}</span>
     </div>
-    <p class="user__phone">Контактный телефон: <span>+7 999-999-99-99</span></p>
+    <p class="user__phone">
+      Контактный телефон: <span>{{ userStore.getWhoAmI.phone }}</span>
+    </p>
   </div>
 
-  <div class="layout__address">
+  <div
+    v-for="address in userStore.getAddresses"
+    :key="address.id"
+    class="layout__address"
+  >
     <div class="sheet address-form">
       <div class="address-form__header">
-        <b>Адрес №1. Тест</b>
+        <b>{{ address.name }}</b>
         <div class="address-form__edit">
           <button type="button" class="icon">
             <span class="visually-hidden">Изменить адрес</span>
           </button>
         </div>
       </div>
-      <p>Невский пр., д. 22, кв. 46</p>
-      <small>Позвоните, пожалуйста, от проходной</small>
+      <p>{{ address.fullAddress }}</p>
+      <small>{{ address.comment }}</small>
     </div>
   </div>
 
@@ -118,6 +120,11 @@
     </button>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useUserStore } from "../stores/user";
+const userStore = useUserStore();
+</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
@@ -251,5 +258,9 @@
   button {
     padding: 12px 23px;
   }
+}
+
+.layout__title {
+  margin-bottom: 27px;
 }
 </style>

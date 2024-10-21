@@ -4,18 +4,18 @@
       <h2 class="title title--small sheet__title">Выберите тесто</h2>
       <div class="sheet__content dough">
         <label
-          v-for="dough in doughs"
+          v-for="dough in store.getDough"
           :key="dough.id"
           class="dough__input"
-          :class="`dough__input--${dough.type}`"
+          :style="{ '--background-image': `url(${dough.image})` }"
         >
           <input
             type="radio"
             name="dought"
             class="visually-hidden"
-            :value="dough.type"
-            :checked="modelValue === dough.type"
-            @input="emit('update:modelValue', $event.target.value)"
+            :value="dough.id"
+            :checked="store.choosed.doughId === dough.id"
+            @input="store.setDoughId($event.target.value)"
           />
           <b>{{ dough.name }}</b>
           <span>{{ dough.description }}</span>
@@ -26,16 +26,8 @@
 </template>
 
 <script setup>
-import doughs from "@/mocks/dough.json";
-
-defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-});
-
-const emit = defineEmits(["update:modelValue"]);
+import { usePizzaStore } from "../../stores/pizza";
+const store = usePizzaStore();
 </script>
 
 <style lang="scss" scoped>
@@ -75,19 +67,9 @@ const emit = defineEmits(["update:modelValue"]);
     display: block;
   }
 
-  &--light {
-    b {
-      &::before {
-        background-image: url("@/assets/img/dough-light.svg");
-      }
-    }
-  }
-
-  &--large {
-    b {
-      &::before {
-        background-image: url("@/assets/img/dough-large.svg");
-      }
+  b {
+    &::before {
+      background-image: var(--background-image);
     }
   }
 

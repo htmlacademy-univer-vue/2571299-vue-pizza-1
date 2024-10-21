@@ -1,14 +1,44 @@
 <template>
   <div class="content__constructor">
-    <div class="pizza pizza--foundation--big-tomato">
+    <div
+      class="pizza"
+      :class="`pizza--foundation--${
+        store.choosed.doughId == 1 ? 'small' : 'big'
+      }-${store.choosed.sauceId == 1 ? 'tomato' : 'creamy'}`"
+    >
       <div class="pizza__wrapper">
-        <div class="pizza__filling pizza__filling--ananas"></div>
-        <div class="pizza__filling pizza__filling--bacon"></div>
-        <div class="pizza__filling pizza__filling--cheddar"></div>
+        <div
+          v-for="ingredient in store.choosed.ingredients"
+          :key="ingredient.ingredientId"
+          class="pizza__filling"
+          :class="getIngredientClass(ingredient)"
+        ></div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { usePizzaStore } from "../../stores/pizza";
+const store = usePizzaStore();
+
+function getIngredientClass(ingredient) {
+  const baseClass = `pizza__filling--${store.getIngredientEnName(
+    ingredient.ingredientId
+  )}`;
+
+  switch (ingredient.quantity) {
+    case 0:
+      return "";
+    case 1:
+      return baseClass;
+    case 2:
+      return `${baseClass} pizza__filling--second`;
+    default:
+      return `${baseClass} pizza__filling--second pizza__filling--third`;
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";

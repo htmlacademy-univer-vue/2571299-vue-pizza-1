@@ -5,21 +5,15 @@
       type="text"
       name="pizza_name"
       placeholder="Введите название пиццы"
-      :value="modelValue"
-      @input="emit('update:modelValue', $event.target.value)"
+      :value="store.getName"
+      @input="store.setName($event.target.value)"
     />
   </label>
 </template>
 
 <script setup>
-defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-});
-
-const emit = defineEmits(["update:modelValue"]);
+import { usePizzaStore } from "../../stores/pizza";
+const store = usePizzaStore();
 </script>
 
 <style lang="scss" scoped>

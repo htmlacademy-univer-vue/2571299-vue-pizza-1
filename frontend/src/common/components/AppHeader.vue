@@ -1,26 +1,64 @@
 <template>
   <header class="header">
     <div class="header__logo">
-      <a href="index.html" class="logo">
+      <router-link to="/" class="logo">
         <img
           src="@/assets/img/logo.svg"
           alt="V!U!E! Pizza logo"
           width="90"
           height="40"
         />
-      </a>
+      </router-link>
     </div>
     <div class="header__cart">
-      <a href="cart.html">0 ₽</a>
+      <router-link to="/cart">{{ cartStore.getPrice }} ₽</router-link>
     </div>
-    <div class="header__user">
-      <a href="#" class="header__login"><span>Войти</span></a>
+
+    <div v-if="userStore.isAuthed" class="header__user">
+      <router-link to="/user">
+        <picture>
+          <img
+            :src="userStore.getWhoAmI.avatar"
+            :alt="userStore.getWhoAmI.name"
+            width="32"
+            height="32"
+          />
+        </picture>
+        <span>{{ userStore.getWhoAmI.name }}</span>
+      </router-link>
+      <router-link to="/" class="header__logout"
+        ><span>Выйти</span></router-link
+      >
+    </div>
+
+    <div v-else class="header__user">
+      <router-link class="header__login" to="/login"
+        ><span>Войти</span></router-link
+      >
     </div>
   </header>
 </template>
 
+<script setup lang="ts">
+import { useCartStore } from "../../stores/cart";
+import { useUserStore } from "../../stores/user";
+const cartStore = useCartStore();
+const userStore = useUserStore();
+</script>
+
 <style lang="scss" scoped>
 @import "@/assets/scss/app.scss";
+
+.logo {
+  display: block;
+
+  img {
+    display: block;
+
+    width: 90px;
+    height: 40px;
+  }
+}
 
 .header {
   position: relative;

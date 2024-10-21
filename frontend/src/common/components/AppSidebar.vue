@@ -1,16 +1,7 @@
 <template>
   <div class="layout__sidebar sidebar">
-    <a href="index.html" class="logo layout__logo">
-      <img
-        src="@/assets/img/logo.svg"
-        alt="V!U!E! Pizza logo"
-        width="90"
-        height="40"
-      />
-    </a>
-
     <router-link
-      class="layout__link"
+      class="layout__link mt"
       :class="{ 'layout__link--active': $route.path === '/orders' }"
       to="/orders"
       >История заказов</router-link
@@ -51,32 +42,20 @@
   }
 }
 
-.layout__logo {
-  display: block;
-
-  margin-bottom: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-  background-color: $green-500;
-
-  img {
-    display: block;
-
-    margin: 0 auto;
-  }
-}
-
 .sidebar {
   flex-grow: 1;
 
   background-color: rgba($green-500, 0.05);
 }
 
+.mt {
+  margin-top: 30px;
+}
+
 .layout__sidebar {
   position: fixed;
   z-index: 2;
-  top: 0;
+  top: 60px;
   left: 0;
 
   width: 180px;

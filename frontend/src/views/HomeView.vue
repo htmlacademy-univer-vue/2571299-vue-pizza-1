@@ -3,8 +3,8 @@
     <form action="#" method="post">
       <div class="content__wrapper">
         <h1 class="title title--big">Конструктор пиццы</h1>
-        <DoughChooser v-model="doughtValue" />
-        <DiameterChooser v-model="diameterEnumValue" />
+        <DoughChooser />
+        <DiameterChooser />
 
         <div class="content__ingredients">
           <div class="sheet">
@@ -13,47 +13,56 @@
             </h2>
 
             <div class="sheet__content ingredients">
-              <SauceChooser v-model="sauceValue" />
-              <IngredientsChooser v-model="ingredientsValue" />
+              <SauceChooser />
+              <IngredientsChooser />
             </div>
           </div>
         </div>
 
         <div class="content__pizza">
-          <PizzaNameInput v-model="pizzaNameValue" />
+          <PizzaNameInput />
           <PizzaObject />
           <div class="content__result">
-            <p>Итого: 0 ₽</p>
-            <button type="button" class="button" disabled>Готовьте!</button>
+            <p>Итого: {{ pizzaStore.getPrice }} ₽</p>
+            <button
+              type="button"
+              class="button"
+              @click="addCurrentPizzaToStoreAndNavToCart"
+              :disabled="!pizzaStore.isReadyForCooking"
+            >
+              Готовьте!
+            </button>
           </div>
         </div>
-        <div class="content">
-          {{ ingredientsValue }}
-        </div>
-        <div class="content">{{ doughtValue }}</div>
-        <div class="content">{{ diameterEnumValue }}</div>
-        <div class="content">{{ pizzaNameValue }}</div>
-        <div class="content">{{ sauceValue }}</div>
       </div>
     </form>
   </main>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import DoughChooser from "../modules/constructor/DoughChooser.vue";
 import DiameterChooser from "../modules/constructor/DiameterChooser.vue";
 import SauceChooser from "../modules/constructor/SauceChooser.vue";
 import IngredientsChooser from "../modules/constructor/IngredientsChooser.vue";
 import PizzaObject from "../modules/constructor/PizzaObject.vue";
 import PizzaNameInput from "../modules/constructor/PizzaNameInput.vue";
-import { ref } from "vue";
-import { Ingredients } from "../modules/constructor/Ingredients";
+import { usePizzaStore } from "../stores/pizza";
+import { useCartStore } from "../stores/cart";
+import { useRouter } from "vue-router";
 
-const doughtValue = ref("");
-const diameterEnumValue = ref();
-const pizzaNameValue = ref("");
-const sauceValue = ref("");
-const ingredientsValue = ref(new Ingredients());
+const pizzaStore = usePizzaStore();
+const cartStore = useCartStore();
+const router = useRouter();
+
+function addCurrentPizzaToStoreAndNavToCart() {
+  cartStore.addPizza({
+    ...pizzaStore.choosed,
+    price: pizzaStore.getPrice,
+    quantity: 1,
+  });
+  pizzaStore.clearChoosed();
+  router.push("/cart");
+}
 </script>
 
 <style lang="scss" scoped>

@@ -5,18 +5,19 @@
 
       <div class="sheet__content diameter">
         <label
-          v-for="size in sizes"
+          v-for="size in store.getSizes"
           :key="size.id"
           class="diameter__input"
           :class="`diameter__input--${multiplierSizeMap[size.multiplier]}`"
+          :style="{ '--background-image': `url(${size.image})` }"
         >
           <input
             type="radio"
             name="diameter"
-            :value="size.multiplier"
-            :checked="modelValue === size.multiplier"
+            :value="size.id"
+            :checked="store.choosed.sizeId === size.id"
             class="visually-hidden"
-            @input="emit('update:modelValue', $event.target.value)"
+            @input="store.setSizeId($event.target.value)"
           />
           <span>{{ size.name }}</span>
         </label>
@@ -26,17 +27,10 @@
 </template>
 
 <script setup>
-import sizes from "@/mocks/sizes.json";
+import { usePizzaStore } from "../../stores/pizza";
 const multiplierSizeMap = { 1: "small", 2: "normal", 3: "big" };
 
-defineProps({
-  modelValue: {
-    type: Number,
-    required: true,
-  },
-});
-
-const emit = defineEmits(["update:modelValue"]);
+const store = usePizzaStore();
 </script>
 
 <style lang="scss" scoped>
@@ -74,7 +68,7 @@ const emit = defineEmits(["update:modelValue"]);
 
       border-radius: 50%;
       background-color: $green-100;
-      background-image: url("@/assets/img/diameter.svg");
+      background-image: var(--background-image);
       background-repeat: no-repeat;
       background-position: center;
     }
