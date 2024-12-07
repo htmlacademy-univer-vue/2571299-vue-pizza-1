@@ -1,6 +1,8 @@
 <template>
   <AppLayout>
-    <router-view />
+    <Suspense>
+      <router-view />
+    </Suspense>
   </AppLayout>
 </template>
 

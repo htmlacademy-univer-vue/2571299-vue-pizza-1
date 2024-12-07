@@ -33,7 +33,7 @@
 import { usePizzaStore } from "../../stores/pizza";
 const pizzaStore = usePizzaStore();
 
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: true,

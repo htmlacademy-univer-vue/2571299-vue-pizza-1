@@ -23,10 +23,10 @@
         </app-drag>
         <AppCounter
           :value="store.getChoosedIngredientById(ingredient.id)?.quantity ?? 0"
+          :max-value="MAX_INGREDIENT_COUNT"
           @update:value="
             store.setСhoosedIngredientQuantity(ingredient.id, $event)
           "
-          :max-value="MAX_INGREDIENT_COUNT"
         />
       </li>
     </ul>

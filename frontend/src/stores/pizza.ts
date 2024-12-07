@@ -1,6 +1,9 @@
 import { defineStore } from "pinia";
 import { MAX_INGREDIENT_COUNT } from "../common/constants";
 import DoughService from "../services/DoughService";
+import IngredientService from "../services/IngredientService";
+import SauceService from "../services/SauceService";
+import SizeService from "../services/SizeService";
 
 interface Ingredient {
   id: number;
@@ -53,146 +56,10 @@ interface PizzaState {
 
 export const usePizzaStore = defineStore("pizza", {
   state: (): PizzaState => ({
-    ingredients: [
-      {
-        id: 1,
-        name: "Грибы",
-        image: "/public/img/filling/mushrooms.svg",
-        price: 33,
-      },
-      {
-        id: 2,
-        name: "Чеддер",
-        image: "/public/img/filling/cheddar.svg",
-        price: 42,
-      },
-      {
-        id: 3,
-        name: "Томаты",
-        image: "/public/img/filling/tomatoes.svg",
-        price: 35,
-      },
-      {
-        id: 4,
-        name: "Лосось",
-        image: "/public/img/filling/salmon.svg",
-        price: 50,
-      },
-      {
-        id: 5,
-        name: "Моцарелла",
-        image: "/public/img/filling/mozzarella.svg",
-        price: 35,
-      },
-      {
-        id: 6,
-        name: "Пармезан",
-        image: "/public/img/filling/parmesan.svg",
-        price: 35,
-      },
-      {
-        id: 7,
-        name: "Салями",
-        image: "/public/img/filling/salami.svg",
-        price: 42,
-      },
-      {
-        id: 8,
-        name: "Блю чиз",
-        image: "/public/img/filling/blue_cheese.svg",
-        price: 50,
-      },
-      {
-        id: 9,
-        name: "Ветчина",
-        image: "/public/img/filling/ham.svg",
-        price: 42,
-      },
-      {
-        id: 10,
-        name: "Чили",
-        image: "/public/img/filling/chile.svg",
-        price: 21,
-      },
-      {
-        id: 11,
-        name: "Ананас",
-        image: "/public/img/filling/ananas.svg",
-        price: 25,
-      },
-      {
-        id: 12,
-        name: "Халапеньо",
-        image: "/public/img/filling/jalapeno.svg",
-        price: 25,
-      },
-      {
-        id: 13,
-        name: "Лук",
-        image: "/public/img/filling/onion.svg",
-        price: 21,
-      },
-      {
-        id: 14,
-        name: "Маслины",
-        image: "/public/img/filling/olives.svg",
-        price: 25,
-      },
-      {
-        id: 15,
-        name: "Бекон",
-        image: "/public/img/filling/bacon.svg",
-        price: 42,
-      },
-    ],
-    dough: [
-      {
-        id: 1,
-        name: "Тонкое",
-        image: "/public/img/dough-light.svg",
-        description: "Из твердых сортов пшеницы",
-        price: 300,
-      },
-      {
-        id: 2,
-        name: "Толстое",
-        image: "/public/img/dough-large.svg",
-        description: "Из твердых сортов пшеницы",
-        price: 300,
-      },
-    ],
-    sauces: [
-      {
-        id: 1,
-        name: "Томатный",
-        price: 50,
-      },
-      {
-        id: 2,
-        name: "Сливочный",
-        price: 50,
-      },
-    ],
-    sizes: [
-      {
-        id: 1,
-        name: "23 см",
-        image: "/public/img/diameter.svg",
-        multiplier: 1,
-      },
-      {
-        id: 2,
-        name: "32 см",
-        image: "/public/img/diameter.svg",
-        multiplier: 2,
-      },
-      {
-        id: 3,
-        name: "45 см",
-        image: "/public/img/diameter.svg",
-        multiplier: 3,
-      },
-    ],
+    ingredients: [],
+    dough: [],
+    sauces: [],
+    sizes: [],
     choosed: {
       name: "",
       sauceId: 1,
@@ -268,6 +135,15 @@ export const usePizzaStore = defineStore("pizza", {
   actions: {
     async fetchDough() {
       this.dough = await DoughService.fetch();
+    },
+    async fetchIngredients() {
+      this.ingredients = await IngredientService.fetch();
+    },
+    async fetchSauces() {
+      this.sauces = await SauceService.fetch();
+    },
+    async fetchSizes() {
+      this.sizes = await SizeService.fetch();
     },
 
     setPizzaForChangeIt(pizza: Choosed) {

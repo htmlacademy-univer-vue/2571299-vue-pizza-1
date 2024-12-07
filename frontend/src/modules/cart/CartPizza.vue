@@ -1,5 +1,5 @@
 <template>
-  <div class="sheet cart__empty" v-if="cartStore.choosedPizzas.length == 0">
+  <div v-if="cartStore.choosedPizzas.length == 0" class="sheet cart__empty">
     <p>В корзине нет ни одной пиццы</p>
   </div>
 
@@ -36,8 +36,8 @@
       <div class="cart-list__button">
         <button
           type="button"
-          @click="changePizza(index)"
           class="cart-list__edit"
+          @click="changePizza(index)"
         >
           Изменить
         </button>
@@ -57,7 +57,7 @@ const cartStore = useCartStore();
 const pizzaStore = usePizzaStore();
 const router = useRouter();
 
-function changePizza(index: number) {
+function changePizza(index) {
   const pizzaForChange = cartStore.getChoosedPizzas[index];
   pizzaStore.setPizzaForChangeIt(pizzaForChange);
   cartStore.removePizza(index);

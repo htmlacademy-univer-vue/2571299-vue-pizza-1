@@ -19,7 +19,7 @@ if (token) {
   try {
     const authStore = useUserStore();
     await authStore.getMe();
-    await router.push("/");
+    await router.push({ name: "home" });
   } catch (e) {
     removeToken();
     console.log(e);

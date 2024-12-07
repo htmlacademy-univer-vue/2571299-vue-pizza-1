@@ -49,7 +49,7 @@ const props = defineProps({
 
 const emit = defineEmits(["update:value"]);
 
-const set = (event: any) => {
+const set = (event) => {
   const newValue = Number(event.target.value) || 0;
   emit("update:value", newValue);
 };

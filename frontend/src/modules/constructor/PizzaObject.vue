@@ -25,7 +25,7 @@ import AppDrop from "../../common/components/AppDrop.vue";
 import { usePizzaStore } from "../../stores/pizza";
 const store = usePizzaStore();
 
-function handleDrop(transferData: { id: number }) {
+function handleDrop(transferData) {
   store.incrementСhoosedIngredientQuantity(transferData.id);
 }
 

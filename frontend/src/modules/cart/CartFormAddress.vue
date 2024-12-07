@@ -6,10 +6,10 @@
       <label class="input">
         <span>Улица*</span>
         <input
+          v-model="cartStore.choosedAddress.street"
           :readonly="cartStore.choosedReceivingOrderEnum != 2"
           type="text"
           name="street"
-          v-model="cartStore.choosedAddress.street"
         />
       </label>
     </div>
@@ -18,10 +18,10 @@
       <label class="input">
         <span>Дом*</span>
         <input
+          v-model="cartStore.choosedAddress.building"
           :readonly="cartStore.choosedReceivingOrderEnum != 2"
           type="text"
           name="house"
-          v-model="cartStore.choosedAddress.building"
         />
       </label>
     </div>
@@ -30,10 +30,10 @@
       <label class="input">
         <span>Квартира</span>
         <input
+          v-model="cartStore.choosedAddress.flat"
           :readonly="cartStore.choosedReceivingOrderEnum != 2"
           type="text"
           name="apartment"
-          v-model="cartStore.choosedAddress.flat"
         />
       </label>
     </div>

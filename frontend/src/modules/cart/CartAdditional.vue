@@ -3,6 +3,7 @@
     <ul class="additional-list">
       <li
         v-for="mics in cartStore.getChoosedMiscs"
+        :key="mics.id"
         class="additional-list__item sheet"
       >
         <p class="additional-list__description">

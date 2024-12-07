@@ -102,7 +102,7 @@ async function login() {
     // Получаем данные пользователя
     await userStore.getMe();
     // Если логин без ошибок, перенаправляем на главную страницу
-    await router.push("/");
+    await router.push({ name: "home" });
   }
 }
 </script>

@@ -14,7 +14,7 @@ const rules = {
       if (isRef(value)) {
         value = value.value;
       }
-      return !!value ? emailRegex.test(String(value).toLowerCase()) : true;
+      return value ? emailRegex.test(String(value).toLowerCase()) : true;
     },
     message: "Электронная почта имеет неверный формат",
   },
@@ -23,7 +23,7 @@ const rules = {
       if (isRef(value)) {
         value = value.value;
       }
-      return !!value ? urlRegex.test(value) : true;
+      return value ? urlRegex.test(value) : true;
     },
     message: "Ссылка имеет неверный формат",
   },

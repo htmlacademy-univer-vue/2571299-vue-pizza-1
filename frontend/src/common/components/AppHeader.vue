@@ -17,7 +17,7 @@
     </div>
 
     <div v-if="userStore.isAuthenticated" class="header__user">
-      <router-link :to="{ name: 'user' }">
+      <router-link :to="{ name: 'profile' }">
         <picture>
           <img
             :src="getPublicImage(userStore.getWhoAmI.avatar)"
@@ -29,9 +29,9 @@
         <span>{{ userStore.getWhoAmI.name }}</span>
       </router-link>
       <router-link
-        @click="userStore.logout"
         :to="{ name: 'home' }"
         class="header__logout"
+        @click="userStore.logout"
         ><span>Выйти</span></router-link
       >
     </div>
